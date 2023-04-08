@@ -1,0 +1,29 @@
+<% if flash[:notice] %>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+
+<h3>
+  設定
+</h3>
+
+<% if current_user %>
+  <div class="UserContainer">
+    <div>
+      <ul class="SideNavigation">
+        <li class="SideNavigation_item"><%= link_to 'アカウント', show_account_user_path(current_user) %>
+        <li class="SideNavigation_item"><%= link_to 'プロフィール', show_profile_user_path(current_user) %>
+      </ul>
+    <div>
+    <table>
+      <tr>
+        <th>メールアドレス</th>
+        <td><%= @user.email %></td>
+      </tr>
+      <tr>
+        <th>パスワード</th>
+        <td>********</td>
+      </tr>
+    </table>
+    <div><%= link_to 'edit', edit_account_user_path(@user) %></div>
+  </div>
+<% end %>

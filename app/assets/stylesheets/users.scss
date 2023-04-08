@@ -1,0 +1,14 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.top_view{
+  height: 600px;
+  background-image: url("https://rails-02-sample.herokuapp.com/assets/home/cover-lg.jpg");
+  background-size: cover;
+  text-align: center;
+}
+
+.top_item{
+  margin: 0;
+  color: #FFFFFF;
+}

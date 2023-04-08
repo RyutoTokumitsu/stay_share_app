@@ -5,12 +5,39 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <%# <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha256-UzFD2WYH2U1dQpKDjjZK72VtPeWP50NoJjd26rnAdUI=" crossorigin="anonymous" /> %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header>
+      <nav class="container_nav">
+        <div class="container_top">
+          <a href="/users">
+            <img class="logo" src="https://rails-02-sample.herokuapp.com/assets/common/logo.png" alt="サイトロゴ">
+          </a>
+          <div class="nav-items">
+            <% if user_signed_in? %>
+              <div class="nav_item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></div>
+              <div>
+                <%= current_user.name %>
+                <%= image_tag current_user.profile_image.url %>
+                <%= link_to 'アカウント設定', show_account_user_path(current_user.id) %>
+                <%= link_to "施設の新規登録", new_room_path %>
+                <%= link_to "登録済み一覧", rooms_path %>
+              </div>
+
+
+            <% else %>
+              <div class="nav_item"><%=link_to "ログイン", new_user_session_path %></div>
+              <div class="nav_item"><%=link_to "新規登録", new_user_registration_path %></div>
+            <% end %>
+          </div>
+        </div>
+      </nav>
+    </header>
+
     <%= yield %>
   </body>
 </html>

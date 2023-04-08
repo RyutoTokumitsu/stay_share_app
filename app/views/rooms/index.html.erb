@@ -1,0 +1,35 @@
+<h3>登録済み一覧</h3>
+
+<% if flash[:notice] %>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>画像</th>
+      <th>施設名</th>
+      <th>紹介文</th>
+      <th>料金</th>
+      <th>作成日</th>
+      <th>編集</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rooms.each do |room| %>
+      <tr>
+        <%# <td>link_to "#{room.hotel_image}", room_path(room)</td> %>
+        <td><%= room.hotel_image %></td>
+        <td><%= link_to "#{room.hotel_name}", room_path(room) %></td>
+        <td><%= room.introduction %></td>
+        <td><%= room.hotel_price %></td>
+        <td><%= room.created_at.to_s(:datetime_jp) %></td>
+        <td><%= link_to "編集", edit_room_path(room) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<h2>画像の処理を入れる</h2>
