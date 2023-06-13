@@ -38,6 +38,7 @@
       <td><%= f.file_field :hotel_image %></td>
     </tr>
   </table>
+  <%= f.hidden_field :user_id, value: @user.id %>
 
   <div>
     <ul>

@@ -1,7 +1,11 @@
+<% if flash[:alert] %>
+  <p class="notice"><%= flash[:alert] %></p>
+<% end %>
+
 <table>
   <tr>
     <th>画像</th>
-    <td><%= @room.hotel_image %></td>
+    <td><%= image_tag @room.hotel_image.thumb.url %></td>
   </tr>
   <tr>
     <th>施設名</th>
@@ -13,11 +17,11 @@
   </tr>
   <tr>
     <th>料金</th>
-    <td><%= @room.hotel_price %></td>
+    <td><%= @room.hotel_price.to_i * @reservation.total_nights %></td>
   </tr>
 </table>
 
-<%= form_with model: @reservation do |f| %>
+<%= form_with model: @reservation, method: :post, url: confirm_reservation_path(@room) do |f| %>
   <table>
     <tr>
       <th><%= f.label :check_in, "チェックイン" %></th>
@@ -29,14 +33,14 @@
     </tr>
     <tr>
       <th><%= f.label :people, "人数" %></th>
-      <td><%= f.text_field :people%></td>
+      <td><%= f.text_field :people %></td>
     </tr>
     </tr>
   </table>
   <%= f.hidden_field :room_id, value: @room.id %> <%#これでroomのidを自動でreservationモデルにいく%>
   <div>
     <ul>
-      <li><%= f.submit "予約する" %></li>
+      <li><%= f.submit "確認画面" %></li>
     </ul>
   </div>
 <% end %>

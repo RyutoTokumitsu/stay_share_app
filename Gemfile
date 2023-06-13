@@ -57,5 +57,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 gem 'mini_magick'
-gem 'carrierwave'
+gem 'carrierwave', :git => 'https://github.com/carrierwaveuploader/carrierwave.git', :branch => 'master'
+gem 'cloudinary', :git => 'https://github.com/cloudinary/cloudinary_gem.git', :branch => 'master'
 gem 'pry-rails'
+gem 'ransack', '~> 3.2', '>= 3.2.1'
+gem 'bootstrap', '~> 4.3.1'
+gem 'jquery-rails'

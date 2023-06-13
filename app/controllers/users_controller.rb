@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :set_q, only:[:index, :search]
+
   def index
     @users = User.all
     @user = current_user
@@ -22,17 +24,26 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    binding.pry
     if @user.update(user_params)
-    binding.pry
       flash[:notice] = "編集が完了しました。"
-      redirect_to show_account_user_path(current_user)
+      redirect_to show_account_user_path(@user, current_user)
     else
       render 'edit'
     end
   end
 
+  def search
+    @results = @q.result
+  end
+
   private
+
+  def set_q
+    @users = User.all
+    @rooms = Room.all
+    @q = User.ransack(params[:q])
+  end
+
   def user_params
     params.require(:user).permit(
       :email,

@@ -1,15 +1,15 @@
 class RoomsController < ApplicationController
   def index
-    @rooms = Room.all
-    @reservations = Reservation.all
+    @rooms = current_user.rooms
   end
 
   def new
+    @user = current_user
     @room = Room.new
   end
 
   def create
-    @room = Room.new(params.require(:room).permit(:hotel_name, :introduction, :hotel_price, :address, :hotel_image))
+    @room = Room.new(params.require(:room).permit(:hotel_name, :introduction, :hotel_price, :address, :hotel_image, :user_id))
     if @room.save
       flash[:notice] = "施設情報が更新されました"
       redirect_to :rooms
@@ -20,8 +20,10 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
-    @reservation = Reservation.new
-    @reservations = @room.reservations
+    @reservation = Reservation.new(room_id: @room.id)
+    @reservations = @room.reservations.build
+    @reservation.check_in = Date.today
+    @reservation.check_out = Date.tomorrow
   end
 
   def edit

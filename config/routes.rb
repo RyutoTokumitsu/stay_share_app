@@ -5,15 +5,24 @@ Rails.application.routes.draw do
   }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  resources :users, except: [:new, :create] do
+  resources :users, except: [:new, :show, :create] do
     member do
       get 'show_account'
       get 'show_profile'
       get 'edit_account'
       get 'edit_profile'
     end
+    collection do
+      get 'search'
+    end
   end
 
+
   resources :rooms
-  resources :reservations
+  resources :reservations do
+    member do
+      post 'confirm'
+    end
+  end
+
 end

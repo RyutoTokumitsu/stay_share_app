@@ -1,0 +1,31 @@
+<table>
+  <tr>
+    <th>チェックイン</th>
+    <td><%= @reservation.check_in.to_s(:datetime_jp) %></td>
+  </tr>
+  <tr>
+    <th>チェックアウト</th>
+    <td><%= @reservation.check_out.to_s(:datetime_jp) %></td>
+  </tr>
+  <tr>
+    <th>宿泊日数</th>
+    <td><%= "#{@reservation.total_nights}日" %></td>
+  </tr>
+  <tr>
+    <th>人数</th>
+    <td><%= @reservation.people %></td>
+  </tr>
+  <tr>
+    <th>金額</th>
+    <td><%= @reservation.room.hotel_price.to_i * @reservation.total_nights * @reservation.people.to_i %></td>
+  </tr>
+</table>
+
+<%= form_with model: @reservation, method: :post do |f| %>
+  <%= f.hidden_field :check_in %>
+  <%= f.hidden_field :check_out %>
+  <%= f.hidden_field :people, value: @reservation.people %>
+  <%= f.hidden_field :room_id, value: @room.id %>
+  <%= f.submit '予約する' %>
+  <%= link_to "修正する", :back %>
+<% end %>

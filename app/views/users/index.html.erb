@@ -1,9 +1,27 @@
 <div class="top_view">
   <h2 class="top_item">
-    Potepan Shareで<br>
-    まだ体験していない世界へ<br>
-    行ってみよう
+  Potepan Shareで<br>
+  まだ体験していない世界へ<br>
+  行ってみよう
   </h2>
 
-</div>
+  <div class="search_view">
+    <h1>ホテル検索</h1>
+    <h3>住所検索</h3>
+    <%= search_form_for @q, url:search_users_path do |f| %>
+    <%= f.label :rooms_address_cont, 'エリア名を検索' %>
+    <%= f.search_field :rooms_address_cont %>
+    <br>
+    <%= f.submit '検索' %>
+    <% end %>
 
+    <h3>フリー検索</h3>
+    <%= search_form_for @q, url:search_users_path do |f| %>
+    <%= f.label :rooms_hotel_name_cont, 'フリー検索' %>
+    <%= f.search_field :rooms_hotel_name_or_rooms_introduction_cont %>
+    <br>
+    <%= f.submit '検索' %>
+    <% end %>
+  </div>
+
+</div>
