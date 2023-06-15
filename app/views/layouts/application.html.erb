@@ -5,12 +5,69 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <%# <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha256-UzFD2WYH2U1dQpKDjjZK72VtPeWP50NoJjd26rnAdUI=" crossorigin="anonymous" /> %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header class="sticky-top">
+      <nav class="navbar navbar-dark bg-info fixed-top">
+      <%# ここにnavbar-expand-○○の追加でブレイクポイントを変更できる。今回は常にハンバーガーメニューを表示なので記載なし。%>
+        <a href="/users">
+          <img class="logo" src="https://rails-02-sample.herokuapp.com/assets/common/logo.png" alt="サイトロゴ">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span>
+            <div class="user_logo">
+            <% if user_signed_in? %>
+              <%= current_user.name %>
+              <%= image_tag current_user.profile_image.url, size: "70x70" %>
+            <% else %>
+              <p>まずはこちら</p>
+            <% end %>
+            </div>
+          </span>
+        </button>
+
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+            <% if user_signed_in? %>
+              <li class="nav_item active">
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "ログアウトしますか？" } %>
+              </li>
+              <li class="nav_item">
+                <%= link_to "アカウント設定", show_account_user_path(current_user.id) %>
+              </li>
+              <li class="nav_item">
+                <%= link_to "施設の新規登録", new_room_path %>
+              </li>
+              <li class="nav_item">
+                <%= link_to "登録済み一覧", rooms_path %>
+              </li>
+              <li class="nav_item">
+                <%= link_to "予約施設一覧", reservations_path %>
+              </li>
+            <% else %>
+              <li class="nav_item">
+                <%=link_to "ログイン", new_user_session_path %>
+              </li>
+              <li class="nav_item">
+                <%=link_to "新規登録", new_user_registration_path %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+
+
+    </header>
+
     <%= yield %>
   </body>
 </html>

@@ -1,0 +1,34 @@
+<h3>予約済み一覧</h3>
+
+<% if flash[:notice] %>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>画像</th>
+      <th>施設名</th>
+      <th>紹介文</th>
+      <th>合計料金</th>
+      <th>チェックイン</th>
+      <th>チェックアウト</th>
+      <th>予約確定日</th>
+      <th>編集</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <td><%= image_tag reservation.room.hotel_image.thumb.url, size: "200x150" %></td>
+        <td><%= reservation.room.hotel_name %></td>
+        <td><%= reservation.room.introduction %></td>
+        <td><%= reservation.room.hotel_price.to_i * reservation.total_nights * reservation.people.to_i %></td>
+        <td><%= reservation.check_in.to_s(:datetime_jp) %></td>
+        <td><%= reservation.check_out.to_s(:datetime_jp) %></td>
+        <td><%= reservation.created_at.to_s(:reservetime_jp) %></td>
+        <td><%= link_to "編集", edit_reservation_path(reservation) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

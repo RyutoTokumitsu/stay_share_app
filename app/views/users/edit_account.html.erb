@@ -1,0 +1,36 @@
+<h3>設定</h3>
+<div class="UserContainer">
+  <div>
+    <ul class="SideNavigation">
+      <li class="SideNavigation_item"><%= link_to 'アカウント', show_account_user_path(@user) %>
+      <li class="SideNavigation_item"><%= link_to 'プロフィール', show_profile_user_path(@user) %>
+    </ul>
+  <div>
+</div>
+
+<h3>アカウント</h3>
+<%= form_with model: @user do |f| %>
+  <table>
+    <tr>
+      <th><%= f.label :email ,"メールアドレス" %></th>
+      <td><%= f.email_field :email, autocomplete: "email", placeholder: "xxx@email.com" %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :encrypted_password, "パスワード変更" %></th>
+      <td><%= f.password_field :encrypted_password, autocomplate:"new-password", placeholder: "半角英数6文字以上" %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :encrypted_password_confirmation,"パスワード変更(確認)" %></th>
+      <td><%= f.password_field :encrypted_password_confirmation, autocomplate:"new-password", placeholder: "再度入力してください" %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :current_encrypted_password ,"現在のパスワード" %></th>
+      <td><%= f.password_field :current_encrypted_password, autocomplate:"current-password", placeholder: "必須項目です" %></td>
+    </tr>
+  </table>
+  <ul>
+    <li><%= f.submit "保存" %></li>
+  </ul>
+<% end %>
+
+<%= link_to '・アカウント設定に戻る', show_account_user_path(@user) %>

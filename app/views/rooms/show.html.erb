@@ -1,0 +1,49 @@
+<% if flash[:alert] %>
+  <p class="notice"><%= flash[:alert] %></p>
+<% end %>
+
+<table>
+  <tr>
+    <th>画像</th>
+    <td><%= image_tag @room.hotel_image.thumb.url %></td>
+  </tr>
+  <tr>
+    <th>施設名</th>
+    <td><%= @room.hotel_name %></td>
+  </tr>
+  <tr>
+    <th>紹介文</th>
+    <td><%= @room.introduction %></td>
+  </tr>
+  <tr>
+    <th>料金</th>
+    <td><%= @room.hotel_price.to_i * @reservation.total_nights %></td>
+  </tr>
+</table>
+
+<%= form_with model: @reservation, method: :post, url: confirm_reservation_path(@room) do |f| %>
+  <table>
+    <tr>
+      <th><%= f.label :check_in, "チェックイン" %></th>
+      <td><%= f.date_field :check_in %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :check_out, "チェックアウト" %></th>
+      <td><%= f.date_field :check_out %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :people, "人数" %></th>
+      <td><%= f.text_field :people %></td>
+    </tr>
+    </tr>
+  </table>
+  <%= f.hidden_field :room_id, value: @room.id %> <%#これでroomのidを自動でreservationモデルにいく%>
+  <div>
+    <ul>
+      <li><%= f.submit "確認画面" %></li>
+    </ul>
+  </div>
+<% end %>
+
+<%= link_to "編集", edit_room_path(@room) %>
+<%= link_to "戻る", :back %>

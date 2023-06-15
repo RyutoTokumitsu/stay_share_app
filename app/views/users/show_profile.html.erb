@@ -1,0 +1,31 @@
+<h3>
+  設定
+</h3>
+
+<div>
+  <div>
+    <ul class="SideNavigation">
+      <li class="SideNavigation_item"><%= link_to 'アカウント', show_account_user_path(@user) %>
+      <li class="SideNavigation_item"><%= link_to 'プロフィール', show_profile_user_path(@user) %>
+    </ul>
+  <div>
+  <table>
+    <tr>
+      <th>アイコン画像</th>
+      <td><%= @user.profile_image %></td>
+    </tr>
+    <tr>
+      <th>名前</th>
+      <td><%= @user.name %></td>
+    </tr>
+    <tr>
+      <th>自己紹介</th>
+      <td><%= @user.profile %></td>
+    </tr>
+  </table>
+  <div>
+    <ul>
+      <li><%= link_to '編集', edit_profile_user_path(@user) %></li>
+    </ul>
+  </div>
+</div>

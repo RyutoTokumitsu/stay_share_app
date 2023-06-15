@@ -1,0 +1,29 @@
+<h3>施設予約の修正</h3>
+
+
+
+<%= form_with model: @reservation do |f| %>
+  <table>
+    <tr>
+      <th><%= f.label :check_in ,"チェックイン" %></th>
+      <td><%= f.date_field :check_in %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :check_out ,"チェックアウト" %></th>
+      <td><%= f.date_field :check_out %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :people ,"人数" %></th>
+      <td><%= f.text_field :people %></td>
+    </tr>
+  </table>
+  <ul>
+    <li><%= f.submit "保存" %></li>
+  </ul>
+<% end %>
+
+<div>
+  <ul>
+    <li><%= link_to "キャンセル", :reservations %></li>
+  </ul>
+</div>

@@ -10,6 +10,57 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
+
  */
+
+@import "bootstrap";
+
+body{
+  margin-top: 95px;
+}
+
+.container_nav{
+  background-color: #0000ff;
+  padding: 15px;
+}
+
+.container_top{
+  margin: 0px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo{
+  width: 300px;
+}
+.logo:hover {
+  cursor: pointer;
+}
+
+.user_logo{
+  padding: 0;
+  text-align: right;
+}
+
+.top_view{
+  height: 800px;
+  background-image: url("https://rails-02-sample.herokuapp.com/assets/home/cover-lg.jpg");
+  background-size: cover;
+  text-align: center;
+  position: relative;
+}
+
+.top_item{
+  margin: 0;
+  color: #FFFFFF;
+}
+
+.search_view{
+  text-align: left;
+  position: absolute;
+  bottom: 0;
+}
+
+th,td{
+  padding: 4px 10px;
+}

@@ -1,0 +1,27 @@
+<h1>検索結果</h1>
+<table>
+  <thead>
+    <tr>
+      <th>施設名</th>
+      <th>施設紹介</th>
+      <th>住所</th>
+      <th>金額</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @results.each do |user| %>
+      <% user.rooms.each do |room| %>
+        <tr>
+          <%# <td><%= room.holel_image </td> %>
+          <td><%= link_to "#{room.hotel_name}", room_path(room) %></td>
+          <td><%= room.introduction %></td>
+          <td><%= room.address %></td>
+          <td><%= room.hotel_price %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Top', users_path %>
