@@ -9,6 +9,7 @@ class RoomsController < ApplicationController
   end
 
   def create
+    @user = current_user
     @room = Room.new(params.require(:room).permit(:hotel_name, :introduction, :hotel_price, :address, :hotel_image, :user_id))
     if @room.save
       flash[:notice] = "施設情報が更新されました"

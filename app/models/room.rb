@@ -5,6 +5,6 @@ class Room < ApplicationRecord
 
   validates :hotel_name, presence: true
   validates :introduction, length: {maximum: 30}, presence: true
-  validates :hotel_price, numericality: true, presence: true
+  validates :hotel_price, numericality: { greater_than:0 }, presence: true
   validates :address, presence: true
 end
